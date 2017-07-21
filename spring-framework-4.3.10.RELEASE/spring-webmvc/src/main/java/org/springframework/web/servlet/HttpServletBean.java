@@ -141,8 +141,7 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 	 * Map config parameters onto bean properties of this servlet, and
 	 * invoke subclass initialization.
 	 * @throws ServletException if bean properties are invalid (or required
-	 * properties are missing), or if subclass initialization fails.
-	 * 改写了Servlet的init，当Servlet初始化的时候调用这里的初始化。
+	 * properties are missing), or if subclass initialization fails. 改写了Servlet的init，当Servlet初始化的时候调用这里的初始化。
 	 */
 	@Override
 	public final void init() throws ServletException {
@@ -150,15 +149,15 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 			logger.debug("Initializing servlet '" + getServletName() + "'");
 		}
 
-		// Set bean properties from init parameters.
+		// Set bean properties from init parameters.加载spring配置
 		PropertyValues pvs = new ServletConfigPropertyValues(getServletConfig(), this.requiredProperties);
 		if (!pvs.isEmpty()) {
 			try {
-				BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
-				ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
+				BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);//创建bean实现包装对象
+				ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());//创建一个资源加载器
 				bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader, getEnvironment()));
 				initBeanWrapper(bw);
-				bw.setPropertyValues(pvs, true);
+				bw.setPropertyValues(pvs, true);//设置spring属性对象
 			}
 			catch (BeansException ex) {
 				if (logger.isErrorEnabled()) {

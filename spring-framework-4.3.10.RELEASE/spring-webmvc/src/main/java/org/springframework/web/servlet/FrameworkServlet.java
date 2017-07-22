@@ -612,7 +612,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	 * @see org.springframework.web.context.support.XmlWebApplicationContext
 	 */
 	protected WebApplicationContext createWebApplicationContext(ApplicationContext parent) {
-		Class<?> contextClass = getContextClass();
+		Class<?> contextClass = getContextClass();//默认返回xmlContext
 		if (this.logger.isDebugEnabled()) {
 			this.logger.debug("Servlet with name '" + getServletName() +
 					"' will try to create custom WebApplicationContext context of class '" +
@@ -625,11 +625,11 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 					"] is not of type ConfigurableWebApplicationContext");
 		}
 		ConfigurableWebApplicationContext wac =
-				(ConfigurableWebApplicationContext) BeanUtils.instantiateClass(contextClass);
+				(ConfigurableWebApplicationContext) BeanUtils.instantiateClass(contextClass);//创建一个WebAppContext
 
 		wac.setEnvironment(getEnvironment());
 		wac.setParent(parent);
-		wac.setConfigLocation(getContextConfigLocation());
+		wac.setConfigLocation(getContextConfigLocation());//设置springMVC配置文件
 
 		configureAndRefreshWebApplicationContext(wac);
 
@@ -653,7 +653,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		wac.setServletContext(getServletContext());
 		wac.setServletConfig(getServletConfig());
 		wac.setNamespace(getNamespace());
-		wac.addApplicationListener(new SourceFilteringListener(wac, new ContextRefreshListener()));
+		wac.addApplicationListener(new SourceFilteringListener(wac, new ContextRefreshListener()));//添加事件监听
 
 		// The wac environment's #initPropertySources will be called in any case when the context
 		// is refreshed; do it eagerly here to ensure servlet property sources are in place for

@@ -734,7 +734,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		// While this may not be part of the regular factory bootstrap, it does otherwise work fine.
 		List<String> beanNames = new ArrayList<String>(this.beanDefinitionNames);
 
-		// Trigger initialization of all non-lazy singleton beans...
+		// Trigger initialization of all non-lazy singleton beans...加载所有非懒加载的bean类
 		for (String beanName : beanNames) {
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
@@ -751,7 +751,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 					}
 					else {
 						isEagerInit = (factory instanceof SmartFactoryBean &&
-								((SmartFactoryBean<?>) factory).isEagerInit());
+								((SmartFactoryBean<?>) factory).isEagerInit());//检查工厂类是否已经初始化
 					}
 					if (isEagerInit) {
 						getBean(beanName);
@@ -778,7 +778,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 					}, getAccessControlContext());
 				}
 				else {
-					smartSingleton.afterSingletonsInstantiated();
+					smartSingleton.afterSingletonsInstantiated();//调用单例初始化完成事件
 				}
 			}
 		}

@@ -5,6 +5,8 @@ import com.waroy.base.BaseJunit4Test;
 import com.waroy.controller.WelcomeHome;
 import org.junit.After;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -17,6 +19,8 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class testWelcome extends BaseJunit4Test {
 
+    private static final Logger logger = LoggerFactory.getLogger(testWelcome.class);
+
     @Autowired
     private WebApplicationContext context;
 
@@ -25,6 +29,7 @@ public class testWelcome extends BaseJunit4Test {
         WelcomeHome welcome = context.getBean(WelcomeHome.class);
         assertTrue(welcome!=null);
         assertTrue(welcome.index()=="index");
+        logger.info("test end");
     }
 
     @Test

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/home")
-public class welcome {
+public class WelcomeHome {
     //添加一个日志器
-    private static final Logger logger = LoggerFactory.getLogger(welcome.class);
+    private static final Logger logger = LoggerFactory.getLogger(WelcomeHome.class);
     //映射一个action
     @RequestMapping("/")
     public  String index(){

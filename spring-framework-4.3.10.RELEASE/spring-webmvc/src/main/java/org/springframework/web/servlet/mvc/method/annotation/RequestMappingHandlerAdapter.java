@@ -734,7 +734,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			}
 		}
 		else {
-			// No synchronization on session demanded at all...
+			// No synchronization on session demanded at all...  调用映射的方法
 			mav = invokeHandlerMethod(request, response, handlerMethod);
 		}
 

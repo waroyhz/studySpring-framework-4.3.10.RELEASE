@@ -577,7 +577,7 @@ public class BeanDefinitionParserDelegate {
 	 */
 	public AbstractBeanDefinition parseBeanDefinitionAttributes(Element ele, String beanName,
 			BeanDefinition containingBean, AbstractBeanDefinition bd) {
-
+		//获取配置文件的属性
 		if (ele.hasAttribute(SINGLETON_ATTRIBUTE)) {
 			error("Old 1.x 'singleton' attribute in use - upgrade to 'scope' declaration", ele);
 		}
@@ -1014,7 +1014,7 @@ public class BeanDefinitionParserDelegate {
 	 * {@code <value>} tag that might be created
 	 */
 	public Object parsePropertySubElement(Element ele, BeanDefinition bd, String defaultValueType) {
-		if (!isDefaultNamespace(ele)) {
+		if (!isDefaultNamespace(ele)) {//子类型的处理
 			return parseNestedCustomElement(ele, bd);
 		}
 		else if (nodeNameEquals(ele, BEAN_ELEMENT)) {

@@ -340,7 +340,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 		List<Match> matches = new ArrayList<Match>();
 		List<T> directPathMatches = this.mappingRegistry.getMappingsByUrl(lookupPath);
 		if (directPathMatches != null) {
-			addMatchingMappings(directPathMatches, matches, request);
+			addMatchingMappings(directPathMatches, matches, request);//去匹配uri
 		}
 		if (matches.isEmpty()) {
 			// No choice but to go through all mappings...
@@ -379,7 +379,7 @@ public abstract class AbstractHandlerMethodMapping<T> extends AbstractHandlerMap
 		for (T mapping : mappings) {
 			T match = getMatchingMapping(mapping, request);
 			if (match != null) {
-				matches.add(new Match(match, this.mappingRegistry.getMappings().get(mapping)));
+				matches.add(new Match(match, this.mappingRegistry.getMappings().get(mapping)));//通过mappingRegistry匹配到uri处理过程
 			}
 		}
 	}

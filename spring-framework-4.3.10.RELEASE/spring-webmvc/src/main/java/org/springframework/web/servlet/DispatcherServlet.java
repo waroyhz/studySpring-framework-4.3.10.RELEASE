@@ -936,7 +936,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				processedRequest = checkMultipart(request);
 				multipartRequestParsed = (processedRequest != request);
 
-				// Determine handler for the current request.
+				// Determine handler for the current request.从HandlerMap内匹配
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null || mappedHandler.getHandler() == null) {
 					noHandlerFound(processedRequest, response);
@@ -963,7 +963,7 @@ public class DispatcherServlet extends FrameworkServlet {
 					return;
 				}
 
-				// Actually invoke the handler.
+				// Actually invoke the handler.调用处理
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
 				if (asyncManager.isConcurrentHandlingStarted()) {
